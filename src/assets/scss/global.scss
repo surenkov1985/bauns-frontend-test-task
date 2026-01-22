@@ -1,0 +1,223 @@
+@use "variables"as *;
+@import url("./variables.scss");
+
+h1,
+.h1,
+.text-content h1 {
+    font-family: var(--font);
+    font-size: var(--font-h1);
+    font-weight: 600;
+    line-height: 1.32;
+}
+
+h2,
+.h2,
+.text-content h2,
+.text-content .h2 {
+    font-family: var(--font);
+    font-size: var(--font-h2);
+    font-weight: 400;
+    line-height: 1.22;
+}
+
+
+
+.text-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+
+    &:not(:last-child) {
+        margin-bottom: clamp(0.75rem, 0.4713rem + 1.2739vw, 2rem);
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 1830px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.5s;
+    font-size: var(--font-p);
+    line-height: 1.28;
+
+    &-primary {
+        border-radius: 100px;
+        padding: 12px 24px;
+        color: var(--clr-main-orange);
+        background: var(--clr-light-orange);
+
+        &:hover {
+            color: var(--clr-bg);
+            background: var(--clr-main-orange);
+        }
+
+        &:disabled,
+        &[disabled] {
+            color: var(--clr-middle-orange);
+            background: var(--clr-light-orange);
+            pointer-events: none;
+        }
+    }
+
+    &-icon {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        color: var(--clr-icon);
+        background: var(--clr-bg);
+
+        &:hover {
+            color: var(--clr-text-main);
+            background: var(--clr-bg);
+        }
+    }
+
+    &-social {
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        color: var(--clr-main-orange);
+        background: var(--clr-light-orange);
+
+        &:hover {
+            color: var(--clr-bg);
+            background: var(--clr-main-orange);
+        }
+    }
+
+}
+
+.burger_btn {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    will-change: transform;
+
+    & span.lines {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+
+        & .line {
+            height: 1px;
+            background: #d0d6e6;
+            transition: all 0.3s;
+
+            &:first-child {
+                width: 16px;
+            }
+
+            &:nth-child(2) {
+                width: 10px;
+            }
+        }
+    }
+
+    &:hover {
+        & span.lines {
+            & .line {
+                &:nth-child(2) {
+                    width: 16px;
+                }
+            }
+        }
+    }
+}
+
+.link {
+    font-weight: 400;
+    font-size: var(--font-p);
+    line-height: 1;
+    vertical-align: middle;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 25%;
+    text-decoration-thickness: 12.5%;
+    transition: 0.5s;
+
+    &-primary {
+        color: var(--clr-text-middle-grey);
+        text-decoration-color: #C9C9C9;
+
+        &:hover {
+            color: var(--clr-main-orange);
+            text-decoration-color: var(--clr-main-orange);
+        }
+    }
+
+    &-secondary {
+        color: var(--clr-text-middle-grey);
+        text-decoration-color: #C9C9C9;
+        opacity: 0.6;
+
+        &:hover {
+            color: var(--clr-main-orange);
+            text-decoration-color: var(--clr-main-orange);
+            opacity: 1;
+        }
+    }
+
+    &-white {
+        color: var(--clr-bg);
+        text-decoration-color: rgba($color: #ffffff, $alpha: 0.5);
+        opacity: 0.8;
+
+        &:hover {
+            color: var(--clr-main-orange);
+            text-decoration-color: rgba($color: #ffffff, $alpha: 1);
+            opacity: 1;
+        }
+
+    }
+
+    &_with-icon {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+
+        & .icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--clr-border);
+            transition: .5s;
+        }
+
+        &:hover {
+            color: var(--clr-main-orange);
+
+            & .icon {
+                background: var(--clr-light-orange);
+            }
+        }
+    }
+}
+
+.tag {
+    display: flex;
+    font-size: auto-clamp(12, 14);
+    padding: 5px 11px;
+    border-radius: 512px;
+    cursor: pointer;
+    background-color: var(--clr-white-100);
+    transition: background-color 0.3s;
+    font-weight: 500;
+
+    &:hover {
+        background: var(--clr-accent);
+    }
+}
