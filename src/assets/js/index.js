@@ -1,4 +1,4 @@
-import { loadScript, setMap, utils } from "./methods";
+import { loadScript, setMap, toggleSubmenu, utils } from "./methods";
 import { initAboutAdvsSlider, initBrandsSlider, initHeroSlider, initPartnersSlider, initSertificatesSlider, initTopCatalogSlider } from "./swipers";
 import { textHandler } from "./textHandler";
 
@@ -13,15 +13,7 @@ const handleResize = () => {
 	setVhCssVar();
 };
 document.addEventListener("DOMContentLoaded", function () {
-	initHeroSlider();
-	initBrandsSlider();
-	initTopCatalogSlider();
-	initPartnersSlider();
-	initSertificatesSlider();
-	initAboutAdvsSlider();
-
-	loadScript(window.location.protocol + "//api-maps.yandex.ru/2.1.79/?lang=ru_RU", setMap);
-
+	toggleSubmenu();
 	textHandler();
 });
 

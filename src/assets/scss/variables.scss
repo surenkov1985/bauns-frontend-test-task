@@ -17,9 +17,9 @@
   --clr-middle-green: #80D581;
   --clr-light-green: #DCF3DC;
 
-  --clr-main-yell: #F6D214;
-  --clr-middle-yell: #FBE989;
-  --clr-light-yell: #FEF9DE;
+  --clr-main-yellow: #F6D214;
+  --clr-middle-yellow: #FBE989;
+  --clr-light-yellow: #FEF9DE;
 
   --clr-main-blue: #0986EB;
   --clr-middle-blue: #84C3F5;
@@ -41,11 +41,15 @@
   --clr-bg-milk: #FBFAF8;
 
   --clr-text-main: #181D27;
+  --clr-text-secondary: #737373;
   --clr-text-dark-grey: #535862;
   --clr-text-middle-grey: #878787;
   --clr-icon: #A3A3A3;
   --clr-border: #EFEFEF;
 
+  --radius-card: 1.5rem;
+  --radius-main: 3.5rem;
+  --radius-section: 2.5rem 2.5rem 3rem 3rem;
 }
 
 @function auto-clamp($min, $max, $unit: vw) {

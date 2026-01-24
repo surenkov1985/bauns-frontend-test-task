@@ -1,0 +1,203 @@
+.header {
+    // display: flex;
+    // flex-direction: column;
+    grid-area: header;
+
+    & .container {
+        padding: 12px 12px 20px 12px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    & .logo {
+        padding: 10px;
+
+        & img {
+            height: 13px;
+        }
+    }
+
+    &__content {
+        padding: 22px 8px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+    }
+
+    &__nav {
+        &_list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        &_item {
+            padding: 0 12px;
+
+            & .sublist {
+                padding-left: 38px;
+                padding-top: 8px;
+                margin-top: 4px;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                position: relative;
+                pointer-events: none;
+
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 13px;
+                    height: calc(100% - 7px);
+                    // height: 100%;
+                    position: absolute;
+                    left: 14px;
+                    top: 0;
+                    border-left: 1px solid var(--clr-border);
+                    border-bottom: 1px solid var(--clr-border);
+                    border-bottom-left-radius: 30px;
+                    pointer-events: none;
+                }
+
+
+                & .subitem {
+                    position: relative;
+
+                    &:not(:last-child) {
+                        &::before {
+                            content: "";
+                            display: block;
+                            width: 13px;
+                            height: calc(100% - 7px);
+                            // height: 100%;
+                            position: absolute;
+                            left: -24px;
+                            top: 0;
+                            border-left: 1px solid var(--clr-border);
+                            border-bottom: 1px solid var(--clr-border);
+                            border-bottom-left-radius: 30px;
+                            pointer-events: none;
+                        }
+                    }
+
+
+                }
+            }
+
+            &.active {
+
+                & .header__nav_sublist {
+                    // max-height: 400px;
+                }
+
+                & .sublist {
+                    pointer-events: all;
+                }
+            }
+
+        }
+
+        &_sublist {
+            // padding-top: 4px;
+            height: auto;
+            max-height: 0;
+            transition: all .5s;
+            overflow: hidden;
+        }
+    }
+
+    &__services {
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+
+        &_link {
+            padding: 0 12px;
+        }
+    }
+}
+
+.service {
+
+    &__card {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: relative;
+        padding: 1.5rem .75rem;
+        border-radius: var(--radius-card);
+        border: 1px solid var(--clr-border);
+        background: var(--clr-bg-milk);
+        transition: .5s;
+
+        &:hover {
+            border-color: var(--clr-main-orange);
+
+            & .service {
+                &__card {
+
+                    &_num {
+                        color: var(--clr-main-orange);
+                    }
+
+
+                }
+            }
+        }
+
+        &_title {
+            padding: 0 12px;
+            color: var(--clr-text-middle-grey);
+            transition: 0.5s;
+        }
+
+        &_num {
+            color: var(--clr-text-dark-grey);
+            padding: 0 12px;
+            transition: 0.5s;
+        }
+
+        & .btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+    }
+}
+
+.footer {
+
+    & .container {
+        padding: 20px 24px 12px;
+    }
+
+    &__link {
+        margin-bottom: 8px;
+    }
+
+    &__copy {
+        counter-reset: var(--clr-text-middle-grey);
+    }
+}
+
+.events {
+    width: 340px;
+    flex-shrink: 0;
+    padding: 24px 0;
+
+    &__heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}

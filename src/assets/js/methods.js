@@ -17,13 +17,13 @@ export const utils = {
 	// Throttle function to limit function calls
 	throttle: (func, limit) => {
 		let inThrottle;
-		return function() {
+		return function () {
 			const args = arguments;
 			const context = this;
 			if (!inThrottle) {
 				func.apply(context, args);
 				inThrottle = true;
-				setTimeout(() => inThrottle = false, limit);
+				setTimeout(() => (inThrottle = false), limit);
 			}
 		};
 	},
@@ -51,7 +51,7 @@ export const utils = {
 			$elem.removeClass("error").attr("data-test", "true");
 			$errElem.text("");
 		}
-	}
+	},
 };
 
 // export function setMap() {
@@ -96,7 +96,7 @@ function initializeMap(mapContainer) {
 			iconImageHref: "/local/templates/zaryadyehall/assets/img/placemark.png",
 			iconImageSize: [170, 190],
 			iconImageOffset: [-90, -120],
-		}
+		},
 	);
 
 	map.behaviors.disable(["scrollZoom"]);
@@ -105,78 +105,78 @@ function initializeMap(mapContainer) {
 	// Create custom controls
 	const button = createMapControls(map, mapCoord, mapContainer);
 	map.controls.add(button, {
-		position: { right: 0, top: 0 }
+		position: { right: 0, top: 0 },
 	});
 }
 
 function createMapControls(map, mapCoord, mapContainer) {
-	const ButtonLayout = ymaps.templateLayoutFactory.createClass(
-		generateMapControlsHTML(),
-		{
-			build: function () {
-				ButtonLayout.superclass.build.call(this);
-				this.bindEventHandlers();
-			},
+	const ButtonLayout = ymaps.templateLayoutFactory.createClass(generateMapControlsHTML(), {
+		build: function () {
+			ButtonLayout.superclass.build.call(this);
+			this.bindEventHandlers();
+		},
 
-			clear: function () {
-				this.unbindEventHandlers();
-				ButtonLayout.superclass.clear.call(this);
-			},
+		clear: function () {
+			this.unbindEventHandlers();
+			ButtonLayout.superclass.clear.call(this);
+		},
 
-			bindEventHandlers: function () {
-				this.zoomInCallback = ymaps.util.bind(this.zoomIn, this);
-				this.zoomOutCallback = ymaps.util.bind(this.zoomOut, this);
-				this.enterFullscreenCallback = ymaps.util.bind(this.enterFullscreen, this);
-				this.openInMapsCallback = ymaps.util.bind(this.openInYaMaps, this);
-				this.getGeolocationCallback = ymaps.util.bind(this.getGeolocation, this);
+		bindEventHandlers: function () {
+			this.zoomInCallback = ymaps.util.bind(this.zoomIn, this);
+			this.zoomOutCallback = ymaps.util.bind(this.zoomOut, this);
+			this.enterFullscreenCallback = ymaps.util.bind(this.enterFullscreen, this);
+			this.openInMapsCallback = ymaps.util.bind(this.openInYaMaps, this);
+			this.getGeolocationCallback = ymaps.util.bind(this.getGeolocation, this);
 
-				$("#zoom-in").bind("click", this.zoomInCallback);
-				$("#zoom-out").bind("click", this.zoomOutCallback);
-				$(".btn_size").bind("click", this.enterFullscreenCallback);
-				$(".btn_geo").bind("click", this.getGeolocationCallback);
-				$("#openInYaMaps").bind("click", this.openInMapsCallback);
-			},
+			$("#zoom-in").bind("click", this.zoomInCallback);
+			$("#zoom-out").bind("click", this.zoomOutCallback);
+			$(".btn_size").bind("click", this.enterFullscreenCallback);
+			$(".btn_geo").bind("click", this.getGeolocationCallback);
+			$("#openInYaMaps").bind("click", this.openInMapsCallback);
+		},
 
-			unbindEventHandlers: function () {
-				$("#zoom-in").unbind("click", this.zoomInCallback);
-				$("#zoom-out").unbind("click", this.zoomOutCallback);
-				$(".btn_geo").unbind("click", this.getGeolocationCallback);
-				$(".btn_size").unbind("click", this.enterFullscreenCallback);
-				$("#openInYaMaps").unbind("click", this.openInMapsCallback);
-			},
+		unbindEventHandlers: function () {
+			$("#zoom-in").unbind("click", this.zoomInCallback);
+			$("#zoom-out").unbind("click", this.zoomOutCallback);
+			$(".btn_geo").unbind("click", this.getGeolocationCallback);
+			$(".btn_size").unbind("click", this.enterFullscreenCallback);
+			$("#openInYaMaps").unbind("click", this.openInMapsCallback);
+		},
 
-			zoomIn: function () {
-				const map = this.getData().control.getMap();
-				map.setZoom(map.getZoom() + 1, { checkZoomRange: true });
-			},
+		zoomIn: function () {
+			const map = this.getData().control.getMap();
+			map.setZoom(map.getZoom() + 1, { checkZoomRange: true });
+		},
 
-			zoomOut: function () {
-				const map = this.getData().control.getMap();
-				map.setZoom(map.getZoom() - 1, { checkZoomRange: true });
-			},
+		zoomOut: function () {
+			const map = this.getData().control.getMap();
+			map.setZoom(map.getZoom() - 1, { checkZoomRange: true });
+		},
 
-			enterFullscreen: function () {
-				const map = this.getData().control.getMap();
-				if (map.container.isFullscreen()) {
-					$(".btn_size").removeClass("active");
-					map.container.exitFullscreen();
-				} else {
-					map.container.enterFullscreen();
-					$(".btn_size").addClass("active");
-				}
-			},
+		enterFullscreen: function () {
+			const map = this.getData().control.getMap();
+			if (map.container.isFullscreen()) {
+				$(".btn_size").removeClass("active");
+				map.container.exitFullscreen();
+			} else {
+				map.container.enterFullscreen();
+				$(".btn_size").addClass("active");
+			}
+		},
 
-			openInYaMaps: function () {
-				const yandexMapsUrl = `https://yandex.ru/maps/?ll=${mapCoord[1]},${mapCoord[0]}&z=17&l=map&pt=${mapCoord[1]},${mapCoord[0]},pm2bl`;
-				window.open(yandexMapsUrl, "_blank");
-			},
+		openInYaMaps: function () {
+			const yandexMapsUrl = `https://yandex.ru/maps/?ll=${mapCoord[1]},${mapCoord[0]}&z=17&l=map&pt=${mapCoord[1]},${mapCoord[0]},pm2bl`;
+			window.open(yandexMapsUrl, "_blank");
+		},
 
-			getGeolocation: function () {
-				const map = this.getData().control.getMap();
-				ymaps.geolocation.get({
+		getGeolocation: function () {
+			const map = this.getData().control.getMap();
+			ymaps.geolocation
+				.get({
 					provider: "yandex",
 					autoReverseGeocode: false,
-				}).then(function (result) {
+				})
+				.then(function (result) {
 					result.geoObjects.options.set("preset", "islands#redCircleIcon");
 					result.geoObjects.get(0).properties.set({
 						balloonContentBody: "Мое местоположение",
@@ -184,12 +184,11 @@ function createMapControls(map, mapCoord, mapContainer) {
 					map.geoObjects.add(result.geoObjects);
 					map.setCenter(result.geoObjects.get(0).geometry.getCoordinates(), 17, { duration: 300 });
 				});
-			},
-		}
-	);
+		},
+	});
 
 	return new ymaps.control.Button({
-		options: { layout: ButtonLayout }
+		options: { layout: ButtonLayout },
 	});
 }
 
@@ -281,13 +280,13 @@ export class ShapeOverlays {
 		this.path = elm.querySelectorAll("path");
 		this.themeShape = document.querySelector(".shape-overlays-theme");
 		this.themePath = this.themeShape?.querySelectorAll("path") || [];
-		
+
 		this.numPoints = 4;
 		this.duration = 1200;
 		this.delayPerPath = 60;
 		this.delayPointsMax = 0;
 		this.delayPointsArray = Array.from({ length: this.numPoints }, () => Math.random() * this.delayPointsMax);
-		
+
 		this.timeStart = Date.now();
 		this.isOpened = false;
 		this.isThemeShapeOpened = false;
@@ -297,7 +296,7 @@ export class ShapeOverlays {
 
 	toggle(duration = 1200) {
 		if (this.isAnimating || this.isThemeShapeAnimating) return;
-		
+
 		this.duration = duration;
 		this.isAnimating = true;
 		this.timeStart = Date.now();
@@ -311,7 +310,7 @@ export class ShapeOverlays {
 
 	themeToggle(duration = 1200) {
 		if (this.isAnimating || this.isThemeShapeAnimating) return;
-		
+
 		this.duration = duration;
 		this.isThemeShapeAnimating = true;
 		this.timeStart = Date.now();
@@ -331,7 +330,7 @@ export class ShapeOverlays {
 			this.isThemeShapeOpened = true;
 			this.themeShape?.classList.add("is-opened");
 		}
-		
+
 		this.renderLoop(withTheme);
 	}
 
@@ -343,19 +342,19 @@ export class ShapeOverlays {
 			this.isThemeShapeOpened = false;
 			this.themeShape?.classList.remove("is-opened");
 		}
-		
+
 		this.renderLoop(withTheme);
 	}
 
 	updatePath(time, withTheme = false) {
 		const points = [];
 		const themePoints = [];
-		
+
 		for (let i = 0; i < this.numPoints; i++) {
 			const myEase = Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1);
 			const thisEase = i % 2 === 1 ? ease.sineOut : ease.exponentialInOut;
 			points[i] = (1 - thisEase(myEase)) * 100;
-			
+
 			if (withTheme) {
 				themePoints[i] = 1 - thisEase(myEase);
 			}
@@ -363,15 +362,15 @@ export class ShapeOverlays {
 
 		let str = "";
 		let themeStr = "";
-		
+
 		str += this.isOpened ? `M 0 0 V ${points[0]}` : `M 0 ${points[0]}`;
 		themeStr += this.isOpened ? `M 0 0 V ${themePoints[0]}` : `M 0 ${themePoints[0]}`;
-		
+
 		for (let i = 0; i < this.numPoints - 1; i++) {
 			const p = ((i + 1) / (this.numPoints - 1)) * 100;
 			const cp = p - ((1 / (this.numPoints - 1)) * 100) / 2;
 			str += `C ${cp} ${points[i]} ${cp} ${points[i + 1]} ${p} ${points[i + 1]} `;
-			
+
 			if (withTheme) {
 				const p = (i + 1) / (this.numPoints - 1);
 				const cp = p - 1 / (this.numPoints - 1) / 2;
@@ -387,12 +386,10 @@ export class ShapeOverlays {
 
 	render(withTheme = false) {
 		const time = Date.now();
-		
+
 		this.path.forEach((path, i) => {
-			const attrToTime = this.isOpened 
-				? this.setPathAttr(time, i)
-				: time - (this.timeStart + this.delayPerPath * i);
-			
+			const attrToTime = this.isOpened ? this.setPathAttr(time, i) : time - (this.timeStart + this.delayPerPath * i);
+
 			const { str, themeStr } = this.updatePath(attrToTime, withTheme);
 			path.setAttribute("d", str);
 
@@ -404,7 +401,7 @@ export class ShapeOverlays {
 
 	renderLoop(withTheme = false) {
 		this.render(withTheme);
-		
+
 		if (Date.now() - this.timeStart < this.duration + this.delayPerPath * (this.path.length - 1) + this.delayPointsMax) {
 			requestAnimationFrame(() => this.renderLoop(withTheme));
 		} else {
@@ -428,7 +425,7 @@ export class ShapeOverlays {
 
 	updateThemePath(time) {
 		const points = [];
-		
+
 		for (let i = 0; i < this.numPoints; i++) {
 			const thisEase = i % 2 === 1 ? ease.sineOut : ease.exponentialInOut;
 			points[i] = 1 - thisEase(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1));
@@ -436,25 +433,25 @@ export class ShapeOverlays {
 
 		let str = "";
 		str += this.isThemeShapeOpened ? `M 0 0 V ${points[0]}` : `M 0 ${points[0]}`;
-		
+
 		for (let i = 0; i < this.numPoints - 1; i++) {
 			const p = (i + 1) / (this.numPoints - 1);
 			const cp = p - 1 / (this.numPoints - 1) / 2;
 			str += `C ${cp} ${points[i]} ${cp} ${points[i + 1]} ${p} ${points[i + 1]} `;
 		}
-		
+
 		str += this.isThemeShapeOpened ? `V 1 H 0` : `V 0 H 0`;
 		return str;
 	}
 
 	renderTheme() {
 		const time = Date.now();
-		
+
 		this.themePath.forEach((path, i) => {
-			const attrToTime = this.isThemeShapeOpened 
+			const attrToTime = this.isThemeShapeOpened
 				? this.setPathAttr(time, i)
 				: time - (this.timeStart + this.delayPerPath * (this.themePath.length - i - 1));
-			
+
 			path.setAttribute("d", this.updateThemePath(attrToTime));
 		});
 	}
@@ -465,7 +462,7 @@ export class ShapeOverlays {
 
 	renderThemeLoop() {
 		this.renderTheme();
-		
+
 		if (Date.now() - this.timeStart < this.duration + this.delayPerPath * (this.path.length - 1) + this.delayPointsMax) {
 			requestAnimationFrame(() => this.renderThemeLoop());
 		} else {
@@ -516,15 +513,15 @@ export function phoneMask(e) {
 
 export function maskedEmail(elem) {
 	let str = elem.value.replace(/[^\w-@\.]/gi, "");
-	
+
 	if (!/[\w-]/g.test(str)) {
 		str = str.replace(/@/, "");
 	}
-	
+
 	if (str.match(/@/g)?.length > 1) {
 		str = str.slice(0, -1);
 	}
-	
+
 	return str;
 }
 
@@ -548,17 +545,11 @@ export const scrollTopShow = (selector) => {
 
 // Header functions
 export function showFixedHeader() {
-	$(".head.fixed")
-		.css({ transition: "all 0.7s" })
-		.addClass("show")
-		.removeClass("hide");
+	$(".head.fixed").css({ transition: "all 0.7s" }).addClass("show").removeClass("hide");
 }
 
 export function hideFixedHeader() {
-	$(".head.fixed")
-		.css({ transition: "all 0.4s" })
-		.removeClass("show")
-		.addClass("hide");
+	$(".head.fixed").css({ transition: "all 0.4s" }).removeClass("show").addClass("hide");
 }
 
 // Popup functions
@@ -568,7 +559,7 @@ export const openPopup = (selector) => {
 
 	$("body").addClass("hidden");
 	popup.addClass("is-open");
-	
+
 	const tl = gsap.timeline();
 
 	tl.to(selector, {
@@ -577,27 +568,27 @@ export const openPopup = (selector) => {
 		duration: 0.1,
 		ease: "power1.out",
 	})
-	.to(popupContent, {
-		translateX: 0,
-		duration: 0.1,
-		ease: "power1.out",
-	})
-	.then(() => {
-		scroll.stop();
+		.to(popupContent, {
+			translateX: 0,
+			duration: 0.1,
+			ease: "power1.out",
+		})
+		.then(() => {
+			scroll.stop();
 
-		const popupForm = popup.find("form");
-		if (popupForm.length) {
-			const firstInput = popupForm.find("input").not("[type=hidden]")[0];
-			$(firstInput).focus();
-		}
-	});
+			const popupForm = popup.find("form");
+			if (popupForm.length) {
+				const firstInput = popupForm.find("input").not("[type=hidden]")[0];
+				$(firstInput).focus();
+			}
+		});
 };
 
 export const closePopup = () => {
 	$("body").removeClass("hidden");
 	$(".popup").removeClass("is-open");
 	scroll.start();
-	
+
 	gsap.timeline()
 		.to(".popup__content", {
 			translateX: "100%",
@@ -649,7 +640,7 @@ export const setMap = () => {
 							// iconImageHref: mapIcon,
 							// iconImageSize: [mapContainer.getBoundingClientRect().width * 0.14, mapContainer.getBoundingClientRect().width * 0.186],
 							// iconImageOffset: [-40, -54]
-						}
+						},
 					);
 				// if (mapCoord2) {
 				// 	pin2 = new ymaps.Placemark(
@@ -671,8 +662,14 @@ export const setMap = () => {
 				function setMapCenter() {
 					map.setCenter(mapCenter);
 					console.log(mapContainer.getBoundingClientRect().width);
-					pin.options.set("iconImageSize", [mapContainer.getBoundingClientRect().width * 0.14, mapContainer.getBoundingClientRect().width * 0.186])
-					pin.options.set("iconImageOffset", [-mapContainer.getBoundingClientRect().width * 0.14 / 2, -mapContainer.getBoundingClientRect().width * 0.186 / 2])
+					pin.options.set("iconImageSize", [
+						mapContainer.getBoundingClientRect().width * 0.14,
+						mapContainer.getBoundingClientRect().width * 0.186,
+					]);
+					pin.options.set("iconImageOffset", [
+						(-mapContainer.getBoundingClientRect().width * 0.14) / 2,
+						(-mapContainer.getBoundingClientRect().width * 0.186) / 2,
+					]);
 					if (!mapContainer.closest(".contacts")) {
 						const centerCoord = map.getGlobalPixelCenter();
 
@@ -689,10 +686,8 @@ export const setMap = () => {
 							centerCoord[1] += 0;
 						}
 
-
 						map.setGlobalPixelCenter(centerCoord);
 					}
-
 				}
 
 				window.addEventListener("resize", setMapCenter);
@@ -701,11 +696,32 @@ export const setMap = () => {
 	} catch (e) {
 		console.log("Yandex Map is not initiated", e);
 	}
-}
+};
 
 export const loadScript = async (src, func = false) => {
 	const script = document.createElement("script");
 	script.src = src;
 	document.body.append(script);
 	if (func) script.onload = () => func();
-}
+};
+export const toggleSubmenu = () => {
+	const submenuList = document.querySelectorAll(".sublist");
+	if (!submenuList.length) return;
+
+	Array.from(submenuList).forEach((submenu) => {
+		const menu = submenu.closest(".list");
+
+		const height = submenu.offsetHeight + parseInt(getComputedStyle(submenu).marginTop);
+		menu.addEventListener("click", (e) => {
+			if (e.target.closest("span.link")) {
+				if (menu.classList.contains("active")) {
+					menu.querySelector(".header__nav_sublist").style.maxHeight = `0`;
+					menu.classList.remove("active");
+				} else {
+					menu.querySelector(".header__nav_sublist").style.maxHeight = `${height}px`;
+					menu.classList.add("active");
+				}
+			}
+		});
+	});
+};

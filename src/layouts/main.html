@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Simex-chem</title>
+    <title>Bighearts | главная</title>
     <meta name="robots" content="noindex,nofollow">
     <link rel="shortcut icon" href="/assets/img/favicon/favicon.svg" type="image/x-icon">
     <!-- Общие стили -->
@@ -14,8 +14,20 @@
 </head>
 
 <body>
+    <div id="wrapper" class="wrapper">
+        <include src="components/header/header.html" locals='{"page":"index"}'></include>
 
-    <block name="content"></block>
+        <main class="main">
+            <div class="main-wrapper">
+                <div class="main-content">
+                    <block name="content"></block>
+                </div>
+                <include src="components/events/events.html"></include>
+            </div>
+        </main>
+        <include src="components/footer/footer.html"></include>
+    </div>
+
     <!-- Скрипты компонентов -->
     <script src="/assets/index.js"></script>
 

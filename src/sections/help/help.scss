@@ -1,0 +1,76 @@
+@use "/assets/scss/variables.scss"as *;
+// @import url("../assets/scss/variables.scss");
+
+.help {
+
+    &__heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        margin-bottom: 1rem;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    &__col {}
+
+    &__widget {
+        border-radius: 32px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding: 24px;
+        background-color: var(--clr-main-orange);
+        border: 8px solid var(--clr-light-orange);
+        color: var(--clr-bg);
+
+        &_tags {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            overflow: hidden;
+            max-height: 76px;
+            gap: 8px;
+        }
+    }
+
+    &__cards {
+        display: flex;
+        height: 100%;
+        gap: 10px;
+    }
+
+    &__card {
+        display: flex;
+        align-items: flex-end;
+        border-radius: 32px;
+        flex: 1 0 167px;
+        // aspect-ratio: 188 / 236;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top center;
+        padding: 8px;
+        transition: 0.3s;
+        font-size: auto-clamp(10, 14);
+        color: var(--clr-text-middle-grey);
+        line-height: 1.32;
+
+        &_title {
+            display: inline-block;
+            padding: 16px;
+            background: var(--clr-bg);
+            border-radius: 8px 8px 24px 24px;
+        }
+
+        &:hover {
+            color: var(--clr-main-orange);
+        }
+    }
+}
