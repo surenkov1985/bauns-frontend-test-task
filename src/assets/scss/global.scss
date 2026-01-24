@@ -440,7 +440,13 @@ body {
     line-height: 1.28;
     vertical-align: middle;
     color: var(--clr-text-dark-grey);
+    cursor: pointer;
 
+    &:hover {
+        & span {
+            background: var(--clr-border);
+        }
+    }
 
     & input {
         position: absolute;
