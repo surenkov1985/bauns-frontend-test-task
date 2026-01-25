@@ -1,5 +1,5 @@
-import { loadScript, setMap, toggleSubmenu, utils } from "./methods";
-import { initAboutAdvsSlider, initBrandsSlider, initHeroSlider, initPartnersSlider, initSertificatesSlider, initTopCatalogSlider } from "./swipers";
+import { closeMobile, toggleMobile, toggleSubmenu, utils } from "./methods";
+import { appsFilterSlider } from "./swipers";
 import { textHandler } from "./textHandler";
 
 function setVhCssVar() {
@@ -13,8 +13,18 @@ const handleResize = () => {
 	setVhCssVar();
 };
 document.addEventListener("DOMContentLoaded", function () {
+	const burgerBtn = document.querySelector(".btn-burger");
+	const mobileLayout = document.querySelector(".mobile_layout");
 	toggleSubmenu();
+	appsFilterSlider();
 	textHandler();
+
+	burgerBtn.addEventListener("click", (e) => {
+		toggleMobile();
+	});
+	mobileLayout.addEventListener("click", (e) => {
+		closeMobile();
+	});
 });
 
 window.addEventListener("resize", utils.debounce(handleResize, 200));

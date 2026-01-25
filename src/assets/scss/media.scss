@@ -1,6 +1,31 @@
-@media screen and (max-width: 1660px) {}
+@media screen and (max-width: 1700px) {
+    .wrapper {
+        grid-template-columns: 260px 1fr;
+    }
 
-@media screen and (max-width: 1550px) {}
+    .events {
+        width: 280px;
+    }
+}
+
+@media screen and (max-width: 1550px) {
+    .main-wrapper {
+        flex-direction: column;
+    }
+
+    .main-content {
+        flex-grow: 0;
+    }
+
+    .events {
+        width: 100%;
+        // display: none;
+
+        &__heading {
+            padding: 0 16px;
+        }
+    }
+}
 
 @media screen and (max-width: 1440px) {}
 

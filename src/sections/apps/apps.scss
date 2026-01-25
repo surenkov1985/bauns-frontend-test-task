@@ -12,11 +12,18 @@
     &__filter {
         padding: 0 16px;
         margin-bottom: 24px;
+        width: 100%;
+        display: grid;
 
         &_list {
-            display: flex;
+            // display: flex;
             align-items: center;
+            width: 100%;
             gap: 4px;
+
+            & .swiper-slide {
+                width: auto;
+            }
         }
     }
 
@@ -89,6 +96,12 @@
             padding: 10px 8px;
         }
 
+        &_links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         &_link {
             padding: 10px 8px;
         }
@@ -116,6 +129,7 @@
         background: var(--clr-middle-pink);
         color: var(--clr-main-red);
         transition: .5s;
+        aspect-ratio: 335 / 170;
 
         &_title {
             padding: 8px;
@@ -130,4 +144,42 @@
             }
         }
     }
+}
+
+
+
+@media screen and (max-width:576px) {
+    .apps {
+
+        &__heading {
+            padding: 0 4px;
+            margin-bottom: 26px;
+        }
+
+        &__filter {
+            padding: 0 4px;
+            margin-bottom: 20px;
+        }
+
+        &__list {
+            gap: 15px;
+        }
+
+        &__card {
+            border-radius: 24px;
+            border-width: 3px;
+            padding: 12px;
+
+            &_links {
+                padding-left: 6px;
+            }
+        }
+
+        &__widget {
+            border-radius: 24px;
+            border-width: 3px;
+            padding: 12px;
+        }
+    }
+
 }

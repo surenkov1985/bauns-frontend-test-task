@@ -1,0 +1,180 @@
+/*!***************************************************************************************************************************************************************!*\
+  !*** css ../node_modules/css-loader/dist/cjs.js!../node_modules/postcss-loader/dist/cjs.js!../node_modules/sass-loader/dist/cjs.js!./sections/help/help.scss ***!
+  \***************************************************************************************************************************************************************/
+:root {
+  --font: "Normalidad", sans-serif;
+  --font-h1: 1.25rem;
+  --font-h2: 1rem;
+  --font-p: 0.875rem;
+  --font-caption: 0.75rem;
+  --clr-main-orange: #FF5100;
+  --clr-middle-orange: #FFA880;
+  --clr-light-orange: #FFE7DB;
+  --clr-main-green: #02AA03;
+  --clr-middle-green: #80D581;
+  --clr-light-green: #DCF3DC;
+  --clr-main-yellow: #F6D214;
+  --clr-middle-yellow: #FBE989;
+  --clr-light-yellow: #FEF9DE;
+  --clr-main-blue: #0986EB;
+  --clr-middle-blue: #84C3F5;
+  --clr-light-blue: #DDEEFC;
+  --clr-main-red: #FF0038;
+  --clr-middle-red: #FF809B;
+  --clr-light-red: #FFDBE3;
+  --clr-main-pink: #FF85C0;
+  --clr-middle-pink: #FFC2DF;
+  --clr-light-pink: #FFEEF6;
+  --clr-main-violet: #924CD6;
+  --clr-middle-violet: #E4D2F5;
+  --clr-light-violet: #F0E6F9;
+  --clr-bg: #ffffff;
+  --clr-bg-milk: #FBFAF8;
+  --clr-text-main: #181D27;
+  --clr-text-secondary: #737373;
+  --clr-text-dark-grey: #535862;
+  --clr-text-middle-grey: #878787;
+  --clr-icon: #A3A3A3;
+  --clr-border: #EFEFEF;
+  --radius-card: 1.5rem;
+  --radius-main: 3.5rem;
+  --radius-section: 2.5rem 2.5rem 3rem 3rem;
+}
+
+.help__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  margin-bottom: 1rem;
+}
+.help__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 12px;
+  gap: 12px;
+}
+.help__widget {
+  border-radius: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  background-color: #FF5100;
+  background-color: var(--clr-main-orange);
+  border: 8px solid #FFE7DB;
+  border: 8px solid var(--clr-light-orange);
+  color: #ffffff;
+  color: var(--clr-bg);
+}
+.help__widget_tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+  max-height: 76px;
+  gap: 8px;
+}
+.help__cards {
+  display: flex;
+  height: 100%;
+  gap: 10px;
+}
+.help__card {
+  display: flex;
+  align-items: flex-end;
+  border-radius: 32px;
+  flex: 1 0 167px;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  padding: 8px;
+  transition: 0.3s;
+  font-size: clamp(10px, 0.2547770701vw + 9.1082802548px, 14px);
+  color: #878787;
+  color: var(--clr-text-middle-grey);
+  line-height: 1.32;
+}
+.help__card_title {
+  display: inline-block;
+  width: 100%;
+  padding: 16px;
+  background: #ffffff;
+  background: var(--clr-bg);
+  border-radius: 8px 8px 24px 24px;
+}
+.help__card:hover {
+  color: #FF5100;
+  color: var(--clr-main-orange);
+}
+
+@media screen and (max-width: 1200px) {
+  .help__list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .help__col:first-child {
+    order: 1;
+  }
+  .help__card {
+    aspect-ratio: 188/236;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .help__widget_tags {
+    max-height: 120px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .help__card {
+    aspect-ratio: 106/140;
+    flex: 1 0 90px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .help__card {
+    font-size: clamp(10px, 0.2547770701vw + 9.1082802548px, 14px);
+  }
+}
+@media screen and (max-width: 576px) {
+  .help__heading {
+    padding: 6px 0;
+  }
+  .help__list {
+    gap: 20px;
+  }
+  .help__cards {
+    gap: 8px;
+  }
+  .help__card {
+    padding: 6px;
+    border-radius: 16px;
+  }
+  .help__card_title {
+    border-radius: 4px 4px 12px 12px;
+  }
+  .help__widget {
+    padding: 20px;
+    border-width: 6px;
+    border-radius: 24px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .help__heading {
+    margin-bottom: 20px;
+  }
+  .help__card {
+    padding: 4px;
+    letter-spacing: 0.5px;
+  }
+  .help__card_title {
+    padding: 8px 4px 8px 6px;
+  }
+  .help__widget {
+    gap: 18px;
+  }
+}
+
+/*# sourceMappingURL=help.css.map*/

@@ -19,11 +19,11 @@ const SECTIONS_DIR = path.resolve(SRC, "sections");
 const pages = fs.readdirSync(PAGES_DIR);
 
 const htmlPlugins = pages.map((page) => {
-  return new HtmlWebpackPlugin({
-    filename: page === "home" ? "index.html" : `${page}/index.html`,
-    template: `pages/${page}/index.html`,
-    inject: false,
-  });
+	return new HtmlWebpackPlugin({
+		filename: page === "home" ? "index.html" : `${page}/index.html`,
+		template: `pages/${page}/index.html`,
+		inject: false,
+	});
 });
 
 /* ---------------------------------------
@@ -31,28 +31,28 @@ const htmlPlugins = pages.map((page) => {
 ---------------------------------------- */
 
 function collectEntries(baseDir, prefix) {
-  if (!fs.existsSync(baseDir)) return {};
+	if (!fs.existsSync(baseDir)) return {};
 
-  const entries = {};
-  const items = fs.readdirSync(baseDir);
+	const entries = {};
+	const items = fs.readdirSync(baseDir);
 
-  items.forEach((name) => {
-    const full = path.join(baseDir, name);
-    const jsFile = path.join(full, `${name}.js`);
+	items.forEach((name) => {
+		const full = path.join(baseDir, name);
+		const jsFile = path.join(full, `${name}.js`);
 
-    if (fs.statSync(full).isDirectory() && fs.existsSync(jsFile)) {
-      entries[`${prefix}/${name}`] = jsFile;
-    }
-  });
+		if (fs.statSync(full).isDirectory() && fs.existsSync(jsFile)) {
+			entries[`${prefix}/${name}`] = jsFile;
+		}
+	});
 
-  return entries;
+	return entries;
 }
 
 const entries = {
-  index: "./index.js",
-  ...collectEntries(COMPONENTS_DIR, "components"),
-  ...collectEntries(SECTIONS_DIR, "sections"),
-  ...collectEntries(PAGES_DIR, "pages"),
+	index: "./index.js",
+	...collectEntries(COMPONENTS_DIR, "components"),
+	...collectEntries(SECTIONS_DIR, "sections"),
+	...collectEntries(PAGES_DIR, "pages"),
 };
 
 /* ---------------------------------------
@@ -60,147 +60,147 @@ const entries = {
 ---------------------------------------- */
 
 const config = {
-  context: SRC,
-  mode,
+	context: SRC,
+	mode,
 
-  entry: entries,
+	entry: entries,
 
-  output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "assets/[name].js",
-    publicPath: "/",   // 🔴 важно
-    clean: true,
-  },
+	output: {
+		path: path.resolve(__dirname, "build"),
+		filename: "assets/[name].js",
+		publicPath: "/", // 🔴 важно
+		clean: true,
+	},
 
-  plugins: [
-    new CopyPlugin({
-      patterns: [
-        {
-          from: "assets/img",
-          to: "assets/img",
-        },
-      ],
-    }),
+	plugins: [
+		new CopyPlugin({
+			patterns: [
+				{
+					from: "assets/img",
+					to: "assets/img",
+				},
+			],
+		}),
 
-    new MiniCssExtractPlugin({
-      filename: "assets/[name].css",
-    }),
+		new MiniCssExtractPlugin({
+			filename: "assets/[name].css",
+		}),
 
-    ...htmlPlugins,
-  ],
+		...htmlPlugins,
+	],
 
-  optimization: {
-    minimize: false,
-  },
+	optimization: {
+		minimize: false,
+	},
 
-  resolve: {
-    extensions: [".js"],
-    alias: {
-      "@": SRC,
-      "@components": COMPONENTS_DIR,
-      "@sections": SECTIONS_DIR,
-    },
-  },
+	resolve: {
+		extensions: [".js"],
+		alias: {
+			"@": SRC,
+			"@components": COMPONENTS_DIR,
+			"@sections": SECTIONS_DIR,
+		},
+	},
 
-  module: {
-    rules: [
-      /* -------- HTML -------- */
+	module: {
+		rules: [
+			/* -------- HTML -------- */
 
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader",
-            options: {
-              sources: false,
-            },
-          },
-          {
-            loader: "posthtml-loader",
-            options: {
-              plugins: [
-                require("posthtml-extend")(), // ❗ без root
-                require("posthtml-include")({
-                  root: SRC,
-                }),
-                require("posthtml-expressions")({
-                  locals: {
-                    ENV: mode,
-                  },
-                }),
-              ],
-            },
-          },
-        ],
-      },
+			{
+				test: /\.html$/,
+				use: [
+					{
+						loader: "html-loader",
+						options: {
+							sources: false,
+						},
+					},
+					{
+						loader: "posthtml-loader",
+						options: {
+							plugins: [
+								require("posthtml-extend")(), // ❗ без root
+								require("posthtml-include")({
+									root: SRC,
+								}),
+								require("posthtml-expressions")({
+									locals: {
+										ENV: mode,
+									},
+								}),
+							],
+						},
+					},
+				],
+			},
 
-      /* -------- SCSS -------- */
+			/* -------- SCSS -------- */
 
-      {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: "/",
-            },
-          },
-          "css-loader",
-          "postcss-loader",
-          "sass-loader",
-        ],
-      },
+			{
+				test: /\.(sa|sc|c)ss$/,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							publicPath: "/",
+						},
+					},
+					"css-loader",
+					"postcss-loader",
+					"sass-loader",
+				],
+			},
 
-      /* -------- Fonts -------- */
+			/* -------- Fonts -------- */
 
-      {
-        test: /\.(woff2?|eot|ttf|otf)$/i,
-        type: "asset/resource",
-        generator: {
-          filename: "assets/fonts/[name][ext]",
-        },
-      },
+			{
+				test: /\.(woff2?|eot|ttf|otf)$/i,
+				type: "asset/resource",
+				generator: {
+					filename: "assets/fonts/[name][ext]",
+				},
+			},
 
-      /* -------- JS -------- */
+			/* -------- JS -------- */
 
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            cacheDirectory: true,
-            presets: [
-              [
-                "@babel/preset-env",
-                {
-                  targets: "ie 11",
-                  modules: false,
-                },
-              ],
-            ],
-          },
-        },
-      },
-    ],
-  },
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader",
+					options: {
+						cacheDirectory: true,
+						presets: [
+							[
+								"@babel/preset-env",
+								{
+									targets: "ie 11",
+									modules: false,
+								},
+							],
+						],
+					},
+				},
+			},
+		],
+	},
 
-  devtool: "source-map",
+	devtool: "source-map",
 
-  devServer: {
-    static: {
-      directory: path.join(__dirname, "public"),
-    },
-    devMiddleware: {
-      writeToDisk: true,
-    },
-    historyApiFallback: false,
-    open: true,
-    port: 3101,
-    host: "local-ip",
-    hot: false,
-    liveReload: true,
-  },
+	devServer: {
+		static: {
+			directory: path.join(__dirname, "build"),
+		},
+		devMiddleware: {
+			writeToDisk: true,
+		},
+		historyApiFallback: false,
+		open: true,
+		port: 3101,
+		host: "local-ip",
+		hot: false,
+		liveReload: true,
+	},
 };
 
 module.exports = config;

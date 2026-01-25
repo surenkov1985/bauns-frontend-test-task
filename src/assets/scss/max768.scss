@@ -1,1 +1,21 @@
-@media screen and (max-width: 768px) {}
+@media screen and (max-width: 768px) {
+    .section-white {
+        background-color: var(--clr-bg-milk);
+    }
+
+    .region {
+        padding: 0;
+        background: none;
+
+        &__title {
+            display: none;
+        }
+
+        & .link {
+            & .icon {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
+}

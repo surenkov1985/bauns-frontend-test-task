@@ -10,24 +10,32 @@
         </div>
         <div class="apps__content">
             <div class="apps__filter">
-                <div class="apps__filter_list">
-                    <label class="apps__filter_item filter-tab">
-                        <input type="radio" name="app-status" value="" checked>
-                        <span>Все</span>
-                    </label>
-                    <label class="apps__filter_item filter-tab">
-                        <input type="radio" name="app-status" value="approve">
-                        <span>Одобренные</span>
-                    </label><label class="apps__filter_item filter-tab">
-                        <input type="radio" name="app-status" value="proccess">
-                        <span>В обработке</span>
-                    </label><label class="apps__filter_item filter-tab">
-                        <input type="radio" name="app-status" value="decline">
-                        <span>Отклоненные</span>
-                    </label><label class="apps__filter_item filter-tab">
-                        <input type="radio" name="app-status" value="draft">
-                        <span>Черновики</span>
-                    </label>
+                <div class="apps__filter_list swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <label class="apps__filter_item filter-tab swiper-slide">
+                                <input type="radio" name="app-status" value="" checked>
+                                <span>Все</span>
+                            </label>
+                        </div>
+                        <div class="swiper-slide"><label class="apps__filter_item filter-tab swiper-slide">
+                                <input type="radio" name="app-status" value="approve">
+                                <span>Одобренные</span>
+                            </label></div>
+                        <div class="swiper-slide"><label class="apps__filter_item filter-tab swiper-slide">
+                                <input type="radio" name="app-status" value="proccess">
+                                <span>В обработке</span>
+                            </label></div>
+                        <div class="swiper-slide"><label class="apps__filter_item filter-tab swiper-slide">
+                                <input type="radio" name="app-status" value="decline">
+                                <span>Отклоненные</span>
+                            </label></div>
+                        <div class="swiper-slide"><label class="apps__filter_item filter-tab swiper-slide">
+                                <input type="radio" name="app-status" value="draft">
+                                <span>Черновики</span>
+                            </label></div>
+
+                    </div>
                 </div>
             </div>
             <div class="apps__list">
@@ -47,9 +55,13 @@
                     <div class="apps__card_title h2">
                         Обследование
                     </div>
-                    <div class="apps__card_link">
-                        <a href="#" class="link link-secondary">Отменить</a>
+                    <div class="apps__card_links">
+                        <button class="btn btn-primary">Памятка</button>
+
+                        <a href="#" class="apps__card_link link link-secondary">Отменить</a>
+
                     </div>
+
                 </div>
                 <div class="apps__card process" data-status="process">
                     <div class="apps__card_heading">
@@ -71,15 +83,7 @@
                         <a href="#" class="link link-secondary">Отменить</a>
                     </div>
                 </div>
-                <a href="#" class="apps__widget">
-
-                    <div class="apps__widget_title">
-                        <div class="h1">Оставьте заявку<br>на помощь!</div>
-                    </div>
-                    <div class="apps__widget_link">
-                        <span class="btn btn-pink">Все услуги</span>
-                    </div>
-                </a>
+                <include src="components/appsWidget/appsWidget.html"></include>
             </div>
         </div>
     </div>

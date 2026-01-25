@@ -54,24 +54,6 @@ export const utils = {
 	},
 };
 
-// export function setMap() {
-// 	let mapContainers = document.querySelectorAll(".map");
-
-// 	if (mapContainers.length === 0) return;
-
-// 	const script = document.createElement("script");
-// 	script.src = "../local/templates/zaryadyehall/assets/libs/buildYaMaps/script.js";
-// 	document.body.append(script);
-// 	try {
-// 		ymaps.ready(() => {
-// 			mapContainers.forEach(mapContainer => {
-// 				initializeMap(mapContainer);
-// 			});
-// 		});
-// 	} catch (e) {
-// 		console.log("Yandex Map is not initiated");
-// 	}
-// }
 function initializeMap(mapContainer) {
 	const id = mapContainer.getAttribute("id");
 	const data = mapContainer.dataset;
@@ -606,13 +588,11 @@ export const closePopup = () => {
 			ease: "power1.out",
 		});
 };
+
 export const setMap = () => {
 	let mapContainers = document.querySelectorAll(".map");
 
 	if (mapContainers.length === 0) return;
-	// const script = document.createElement("script");
-	// script.src = "../local/templates/zaryadyehall/assets/libs/buildYaMaps/script.js";
-	// document.body.append(script);
 	try {
 		ymaps.ready(() => {
 			for (let mapContainer of document.querySelectorAll(".map")) {
@@ -622,39 +602,15 @@ export const setMap = () => {
 					mapZoom = data.zoom,
 					mapIcon = data.icon,
 					mapTitle = data.title,
-					// mapCoord2 = JSON.parse(data.coord2),
-					// mapTitle2 = data.title2,
 					mapCenter = JSON.parse(data.center),
 					map = new ymaps.Map(id, {
 						center: mapCenter,
 						zoom: mapZoom,
 						controls: ["smallMapDefaultSet"],
 					}),
-					pin = new ymaps.Placemark(
-						mapCoord,
-						{
-							hintContent: mapTitle,
-						},
-						{
-							// iconLayout: "default#image",
-							// iconImageHref: mapIcon,
-							// iconImageSize: [mapContainer.getBoundingClientRect().width * 0.14, mapContainer.getBoundingClientRect().width * 0.186],
-							// iconImageOffset: [-40, -54]
-						},
-					);
-				// if (mapCoord2) {
-				// 	pin2 = new ymaps.Placemark(
-				// 		mapCoord2,
-				// 		{
-				// 			hintContent: mapTitle2,
-				// 		},
-				// 		{
-				// 			iconLayout: "default#image",
-				// 			iconImageHref: "../img/placemark.png",
-				// 		}
-				// 	);
-				// 	map.geoObjects.add(pin2);
-				// }
+					pin = new ymaps.Placemark(mapCoord, {
+						hintContent: mapTitle,
+					});
 
 				map.behaviors.disable(["scrollZoom"]);
 				map.geoObjects.add(pin);
@@ -672,8 +628,6 @@ export const setMap = () => {
 					]);
 					if (!mapContainer.closest(".contacts")) {
 						const centerCoord = map.getGlobalPixelCenter();
-
-						// смещаем центр карты
 
 						if (window.innerWidth > 1200) {
 							// centerCoord[0] -= 350;
@@ -695,6 +649,41 @@ export const setMap = () => {
 		});
 	} catch (e) {
 		console.log("Yandex Map is not initiated", e);
+	}
+};
+
+export const closeMobile = () => {
+	const burgerBtn = document.querySelector(".btn-burger");
+	const header = document.querySelector(".header");
+	const mobile = header.querySelector(".header__content");
+	const mobileLayout = header.querySelector(".mobile_layout");
+
+	burgerBtn.classList.remove("active");
+	header.classList.remove("is-mobile-open");
+	mobile.classList.remove("show");
+	mobileLayout.classList.remove("show");
+	document.body.classList.remove("hidden");
+};
+
+export const openMobile = () => {
+	const burgerBtn = document.querySelector(".btn-burger");
+	const header = document.querySelector(".header");
+	const mobile = header.querySelector(".header__content");
+	const mobileLayout = header.querySelector(".mobile_layout");
+
+	burgerBtn.classList.add("active");
+	header.classList.add("is-mobile-open");
+	mobile.classList.add("show");
+	mobileLayout.classList.add("show");
+	document.body.classList.add("hidden");
+};
+export const toggleMobile = () => {
+	const mobile = document.querySelector(".header__content");
+
+	if (!mobile.classList.contains("show")) {
+		openMobile();
+	} else {
+		closeMobile();
 	}
 };
 
