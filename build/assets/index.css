@@ -997,6 +997,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
+  max-width: 1212px;
 }
 
 .wrapper {
@@ -1321,6 +1322,7 @@ body {
 
 .events {
   width: 340px;
+  flex-grow: 1;
   flex-shrink: 0;
   padding: 24px 8px;
 }
